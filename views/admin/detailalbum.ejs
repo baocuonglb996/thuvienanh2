@@ -1,0 +1,59 @@
+	
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin management</title>
+	<link rel="stylesheet" href="../../css/bootstrap.css" />
+	<link rel="stylesheet" href="../../css/admin_style.css" /> 
+	<style type="text/css">
+	@media (min-width: 1200px) {
+    .container{
+        max-width: 970px;
+    }
+     .incenter img{
+      display: block;
+      margin: auto;
+    }
+}
+	</style>
+</head>
+<body>
+ <div class="container">
+       <% include ./layout/header.ejs %>
+      <div class="row">
+      <div class="col-lg-12">
+      <h4 style="margin-left: 190px;"><%=album.title%></h4>
+      <%for(var i = 0; i < imgs.length; ++i){%>
+      <div class="img-responsive incenter">         
+      <img class="img-thumbnail img-responsive" src="../<%=imgs[i].imagePath%>" />
+      </div>
+      <%}%>
+        </div>
+      </div>
+       <% include ./layout/footer.ejs %>
+  </div>
+  <script src="../../js/jquery.min.js"></script>
+
+  <script>
+// 	$(document).ready(function(){
+// 	   $(".btn-danger").click(function(e) {
+// 	    if (confirm("Bạn thực sự muốn xóa?")){
+// 	    e.preventDefault();
+// 	    var delete_image = $(this).val();
+
+// 	    $.ajax({    
+// 	    type    : 'DELETE',
+// 	    url     : '/admin/delimage',
+// 	    data: {imagetodelete:  delete_image},
+// 	    success : function(response) {
+// 	       alert(response.notify);
+// 	       location.reload();
+// 	    }
+// 	    });
+// 	    }
+// 	});
+// });
+ 
+</script>
+</body>
+ 

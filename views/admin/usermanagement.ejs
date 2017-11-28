@@ -1,0 +1,92 @@
+	
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin management</title>
+	<link rel="stylesheet" href="../css/bootstrap.css" />
+	<link rel="stylesheet" href="../css/admin_style.css" /> 
+	<style type="text/css">
+	@media (min-width: 1200px) {
+    .container{
+        max-width: 970px;
+    }
+}
+	</style>
+</head>
+<body>
+ <div class="container">
+       <% include ./layout/header.ejs %>
+      <div class="row">
+        <div class="col-lg-12">
+         <table class="table table-bordered">
+		    <th>STT</th>
+		    <th>Username</th>
+		    <th>Password</th>
+		    <th>Uploadable</th>
+		    <th>Delete</th>
+		    <% var size = users.length;
+		     for(var i = 0; i < size; ++i){%>
+		     <tr class="success">
+		        <td class="col-xs-1"><%=i+1%></td>
+		        <td class="col-xs-3"><%=users[i].username %></td>
+		        <td class="col-xs-4"><%=users[i].password %></td>
+		       	<td class="col-xs-2" align="center	">
+		        <button class="btn btn-primary"  value="<%=users[i]._id%>"><%if(users[i].uploadable == "true"){%>Yes<%}else{%>No<%}%></button>
+		        
+      			</td>
+
+				<td class="col-xs-2"><button class="btn btn-danger" value='<%=users[i]._id%>'>Delete</button></td>
+
+		     </tr>
+		     <%}%>
+    	</table>
+        </div>
+      </div>
+       <% include ./layout/footer.ejs %>
+  </div>
+  <script src="../js/jquery.min.js"></script>
+
+  <script>
+   var d = document.getElementById("usermanagement");
+	d.className += "active"; 
+</script>
+  <script>
+      $(document).ready(function(){
+       $(".btn-danger").click(function(e) {
+       	if (confirm("do you really want delete this user?")){
+        e.preventDefault();
+        console.log("something run");
+        var idtodelete = $(this).val();
+        $.ajax({    
+        type    : 'DELETE',
+        url     : '/admin/deleteuser/'+idtodelete,
+        data: {idtodelete: idtodelete},
+        success : function(response) {
+           alert(response.message);
+           location.href = "../../admin/user";
+        }
+        });
+    	}
+    });
+    });
+</script>
+<script>
+$(document).ready(function(){
+    $(".btn-primary").click(function(e){
+     e.preventDefault();
+     var state_before_change =  $(this).text().toString();
+     var id_user = $(this).val();
+        $.ajax({    
+        type    : 'POST',
+        url     : '/admin/uploadable/'+id_user,
+        data: {state_before_change: state_before_change,id_user:id_user},
+        success : function(response) {
+            location.href = "../../admin/user";
+
+        }
+        });
+    });
+});
+</script>
+</body>
+ 

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Album detail
+	</title>
+	
+	
+	<!-- <link rel="stylesheet" href="./css/bootstrap337.min.css" /> -->
+	<link rel="stylesheet" href="../../css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../../css/admin_style.css" /> 
+	<style type="text/css">
+   @media (min-width: 1200px) {
+    .container{
+      max-width: 970px;
+    }
+  }
+</style>
+
+</head>
+<body>
+	
+  <div class="container">
+
+   <div class="header clearfix">
+    <nav>
+      <ul class="nav nav-pills pull-right">
+       <% if(userlogin){ %>
+       <li role="presentation" id="homepage"  ><a href="/">Home page</a></li>
+       <li role="presentation"><a href="/user/profile">Profile</a></li>
+       <li role="presentation"><a href="/user/logout">Logout</a></li>
+       <% } else { %>
+       <li role="presentation" id="homepage"  ><a href="/">Home page</a></li>
+       <li>
+         <a  id="register" class="page-scroll" data-toggle="modal" href="#registerModal">Register</a></li>
+         <li role="presentation" id="profile" ><a href="/user/login">Login</a></li>
+         <% } %>
+       </ul>
+     </nav>
+     <h3 class="text-muted">Dấu Ấn UET</h3>
+
+   </div>
+     <!--  <div class="row">
+      <div class="col-lg-12">
+      <h4><%=album.title%></h4>
+        <%for(var i = 0; i < imgs.length; ++i){%>
+      <div class="img-responsive">     
+                <img class="img-thumbnail img-responsive" src="../<%=imgs[i].imagePath%>" />
+      </div>
+      <%}%>
+      </div>
+    </div> -->
+    <h4><%=album.title%></h4>
+    <%for(var i = 0; i < all_img_ondetail.length; ++i){%>
+    <div class="row">
+      <div class="col-sm-6 col-md-8">
+        <div class="img-responsive">     
+          <img class="img-thumbnail img-responsive" src="../<%=all_img_ondetail[i].img.imagePath%>" />
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+       <%if(!userlogin){%>
+       <div class="alert alert-info">
+         <strong>Info!</strong> Please login to see all comments and write it.
+       </div>
+
+       <%}else{%>
+       <%var size = all_img_ondetail[i].comments.length%>
+       <%for(var j = 0; j < size; ++j){%>
+       <div class="alert alert-info">
+       <%= all_img_ondetail[i].comments[j].content; %>
+       </div>
+       <%}%>
+
+       <form id="commentform" action="../../user/commentversion2" method="post"> 
+         <input type="hidden" name="userid" value= "<%= userid%>" >
+         <input type="hidden" name="imgid" value= "<%= imgs[i]._id%>" >
+         <input type="hidden" name="albumid" value= "<%= album._id%>" >
+         <table>
+         <table>
+          <tr>
+            <td width="225"><div  class="form-group">
+              <input name="comment" class="form-control" id ="commentimg" required type="text"  placeholder="Enter comment..." > 
+            </div></td>
+            <td> <button style="margin-bottom: 12px;" type="submit" class="btn btn-primary pull-right">comment</button></td>
+            <tr>
+            </table>
+          </form>
+
+
+          <%}%>
+        </div>
+      </div>
+      <%if(i+1 != imgs.length){%><hr><%}%>
+      <%}%>
+
+
+      <footer class="footer">
+        <p>&copy; 2017 User Homepage, LBC.</p>
+      </footer>
+    </div>
+    <div id="registerModal" class="modal fade col-xs-6 center-register" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h2 class="text-center">Register User Account!</h2>
+
+            <form  class="col-xs-12" method="post"><!-- action="/api/updateproduct" -->
+              <div class="form-group">
+                <p id="message"></p>
+              </div>
+              <div class="form-group">
+                <p id="loginform"></p>
+              </div>
+              <div class="form-group">
+               <label for="username">User Name:</label>
+               <input  type="text" class="form-control" placeholder="Enter User Name" name="username" id="username" required />
+             </div>
+
+
+             <div class="form-group">
+               <label for="password">Password:</label>
+               <input type="password"  class="form-control" id="password" placeholder="Enter password" name="password" required/>
+             </div>
+             <div class="form-group">
+              <label for="retypepassword">Retype Password:</label>
+              <input type="password" class="form-control" id="retypepassword" placeholder="Retype password" name="retypepassword" required /> 
+            </div>
+          </form>
+
+          <br/>
+          <button class="btn btn-danger pull-right" data-dismiss="modal" aria-hidden="true"> Cancel </button>
+          <br/>
+          <button class="btn btn-success pull-right">  Register </button>
+          <div style="clear: both"></div>
+
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+    </div>
+  </div>
+<!--   <script  src="./js/jquery321.min.js"></script>
+  <script  src="./js/bootstrap337.min.js"></script>-->
+<!--   <script src="js/index.js"></script> 
+      <script src="js/jquery.min.js"></script>
+    -->
+    <script src="../../js/jquery.min.js"></script> 
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/index.js"></script>
+
+  </body>
+  </html>
+
