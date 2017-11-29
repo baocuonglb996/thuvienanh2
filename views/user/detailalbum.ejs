@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User album</title>
+  <link rel="stylesheet" href="../../css/bootstrap.css" />
+  <link rel="stylesheet" href="../../css/admin_style.css" /> 
+  <script src="../../js/jquery.min.js"></script>
+  <style type="text/css">
+  </style>
+</head>
+<body>
+ <div class="container">
+    
+  <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" id="management"><a href="/">HomePage</a></li>
+            <li role="presentation" id="sensor"><a href="/admin/censor">Profile</a></li>
+            <li role="presentation"><a href="/admin/logout">Logout</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Profile Album</h3>
+  </div>
+
+      <div class="row">
+
+        <div class="col-lg-12"> 
+        <h3><%=album.title%></h3>
+          <%var size = images.length;%>
+          <%for(var i = 0; i < size; ++i){%>
+               <div class="img-responsive">
+               <label for="description">Image:</label>
+                <img  name="imagepath" class="img-thumbnail img-responsive" src="../<%=images[i].imagePath%>" />
+              </div>
+             <hr>
+            
+          <%}%>
+          <a href="../user/profile" role="button" class="btn btn-primary pull-right" value="">Back</a>
+        </div>
+      </div>
+      
+      <footer class="footer">
+        <p>&copy; 2017 User Profile, LBC.</p>
+  </footer>
+  </div>
+</body>
+</html>
+`

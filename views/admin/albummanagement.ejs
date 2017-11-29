@@ -1,0 +1,83 @@
+	
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin management</title>
+	<link rel="stylesheet" href="../css/bootstrap.css" />
+	<link rel="stylesheet" href="../css/admin_style.css" /> 
+	<style type="text/css">
+		@media (min-width: 1200px) {
+			.container{
+				max-width: 970px;
+			}
+			.thumbnail img {
+				height: 200px;  
+			}
+		}
+		table{
+			position: relative;
+			top: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<% include ./layout/header.ejs %>
+		<div class="row">
+			<div class="col-lg-12">
+				 <a role="button" class="btn btn-success pull-right" href="../admin/newalbum">Create New Album</a>
+				<table class="table table-bordered">
+					<th>STT</th>
+					<th>Abum</th>
+					<th>Title</th>
+					<th>Delete</th>
+					<th class="span">Detail</th>
+
+					<%for(var i = 0; i < all_album_onhome.length; ++i ){%>
+					<tr class="success">
+						<td class="col-xs-1"><%=i+1%></td>
+						<td class="col-xs-5">
+							<%for(var j = 0; j < 1; ++j){%>
+							<div class="thumbnail">
+								<img src="<%= all_album_onhome[i].images[j].imagePath %>" alt="..." class="img-responsive">
+							</div>
+							<%}%>
+						</td>
+						<td class="col-xs-2"><%=all_album_onhome[i].album.title%></td>
+						
+						<td class="col-xs-2"><button class="btn btn-danger" value='<%=all_album_onhome[i].album._id%>'>Delete</button></td>
+						<td class="col-xs-2"><a role="button" class="btn btn-primary" href='../admin/album/<%=all_album_onhome[i].album._id%>'">Detail</a></td>
+
+					</tr>
+					<%}%>
+
+				</table> 
+			</div>
+		</div>
+		<% include ./layout/footer.ejs %>
+	</div>
+	<script src="../js/jquery.min.js"></script>
+
+	<script>
+// 	$(document).ready(function(){
+// 	   $(".btn-danger").click(function(e) {
+// 	    if (confirm("Bạn thực sự muốn xóa?")){
+// 	    e.preventDefault();
+// 	    var delete_image = $(this).val();
+
+// 	    $.ajax({    
+// 	    type    : 'DELETE',
+// 	    url     : '/admin/delimage',
+// 	    data: {imagetodelete:  delete_image},
+// 	    success : function(response) {
+// 	       alert(response.notify);
+// 	       location.reload();
+// 	    }
+// 	    });
+// 	    }
+// 	});
+// });
+var d = document.getElementById("albummanagement");
+d.className += "active"; 
+</script>
+</body>
