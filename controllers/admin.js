@@ -30,7 +30,11 @@ passport.use(new LocalStrategy({passReqToCallback: true},
       return done(null, admin);
     });
   }
+<<<<<<< HEAD
   ));
+=======
+));
+>>>>>>> bc203cae8bac6a31dfbac5095c17603c099ca0f7
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -44,8 +48,13 @@ passport.deserializeUser(function(id, done) {
 
 
 router.post("/",passport.authenticate('local', { successRedirect: '/admin/management',
+<<<<<<< HEAD
  failureRedirect: '/admin/login',
  failureFlash: true }))
+=======
+                                   failureRedirect: '/admin/login',
+                                   failureFlash: true }))
+>>>>>>> bc203cae8bac6a31dfbac5095c17603c099ca0f7
 
 router.get('/login', function(req, res, next) {
   var message = req.flash('error');
@@ -53,9 +62,15 @@ router.get('/login', function(req, res, next) {
 });
 
 router.get('/management',isLoggedIn, function(req, res, next) {
+<<<<<<< HEAD
   Image.find(function(err, docs){
    res.render('admin/management', { title: 'Admin management', images: docs });
  });
+=======
+    Image.find(function(err, docs){
+       res.render('admin/management', { title: 'Admin management', images: docs });
+   });
+>>>>>>> bc203cae8bac6a31dfbac5095c17603c099ca0f7
 });
 
 router.get('/logout', function(req, res, next) {
@@ -67,6 +82,7 @@ router.get('/logout', function(req, res, next) {
 
 router.post('/uploadable/:_id',isLoggedIn,function(req, res){
   console.log(req.body.state_before_change);
+<<<<<<< HEAD
   if(req.body.state_before_change === "No"){
    User.findOneAndUpdate({_id:req.params._id},
     {"$set": {"uploadable": "true"}}, 
@@ -83,6 +99,24 @@ router.post('/uploadable/:_id',isLoggedIn,function(req, res){
     })
 
 }
+=======
+    if(req.body.state_before_change === "No"){
+       User.findOneAndUpdate({_id:req.params._id},
+      {"$set": {"uploadable": "true"}}, 
+      function (err) {
+          if (err) res.send(err);
+          res.json({message: "changed successfully"});       
+      })
+    }else{
+      User.findOneAndUpdate({_id:req.params._id},
+      {"$set": {"uploadable": "false"}}, 
+      function (err) {
+          if (err) res.send(err);
+          res.json({message: "changed successfully"});       
+      })
+
+    }
+>>>>>>> bc203cae8bac6a31dfbac5095c17603c099ca0f7
 
 })
 // delete this router after finishing test;
@@ -94,6 +128,7 @@ router.get("/testuser",function(req, res){
 
 
 router.get('/censor',isLoggedIn, function(req, res, next) {
+<<<<<<< HEAD
   Imagecensor.find(function(err, docs){
    res.render('admin/censor', { imagecensors: docs });
  });
@@ -103,6 +138,17 @@ router.get('/user',isLoggedIn, function(req, res, next) {
   User.find(function(err, users){
    res.render('admin/usermanagement', { users: users });
  });
+=======
+    Imagecensor.find(function(err, docs){
+       res.render('admin/censor', { imagecensors: docs });
+   });
+});
+
+router.get('/user',isLoggedIn, function(req, res, next) {
+    User.find(function(err, users){
+       res.render('admin/usermanagement', { users: users });
+   });
+>>>>>>> bc203cae8bac6a31dfbac5095c17603c099ca0f7
 });
 
 router.route('/deleteuser/:_id')
@@ -114,6 +160,7 @@ router.route('/deleteuser/:_id')
           return res.send(err);
         else
           res.send({message: "deleted  successfully user " + req.params._id });
+<<<<<<< HEAD
         
       });
     }
@@ -130,12 +177,31 @@ router.route('/updateimg').get(function(req, res){
     }
   });
 });
+=======
+  
+    });
+  }
+
+})
+
+
+router.route('/updateimg').get(function(req, res){
+      Image.findOne({_id: req.query.id}, function(err,result){
+      var idtoupdate = req.query.id;
+      if(err) throw err;
+      else{
+        res.render('admin/updateimg', {id_update:idtoupdate,update_image:result});
+      }
+    });
+  });
+>>>>>>> bc203cae8bac6a31dfbac5095c17603c099ca0f7
 
 router.route('/delimage')
 .delete(function(req, res){
 	if(req.body.imagetodelete){
 		  //console.log("ket qua " + req.body.result_product)
 		  Image.remove({'_id': req.body.imagetodelete}, function(err, product){
+<<<<<<< HEAD
         if(err) 
          return res.send(err);
        else
@@ -145,14 +211,31 @@ router.route('/delimage')
    }
 
  })
+=======
+    		if(err) 
+    			return res.send(err);
+   			else
+     			res.send({notify: "deleted successfully " + req.body.imagetodelete });
+  
+		});
+	}
+
+})
+>>>>>>> bc203cae8bac6a31dfbac5095c17603c099ca0f7
 router.route('/updateimg/:_id')
 .put(function(req, res){
 	Image.findOneAndUpdate({_id:req.params._id},
 		{"$set": {"title": req.body.title, "describe": req.body.description}}, 
 		function (err) {
+<<<<<<< HEAD
       if (err) res.send(err);
       res.json({notify: "updated successfully "});       
       console.log('Record updated');
+=======
+        if (err) res.send(err);
+        res.json({notify: "updated successfully "});       
+        console.log('Record updated');
+>>>>>>> bc203cae8bac6a31dfbac5095c17603c099ca0f7
     })
 })
 
@@ -162,6 +245,7 @@ router.get('/login', function(req, res, next) {
 });
 
 router.route('/censordetail').get(function(req, res){
+<<<<<<< HEAD
   Imagecensor.findOne({_id: req.query.id}, function(err,result){
     var idtocensor = req.query.id;
     if(err) throw err;
@@ -170,6 +254,16 @@ router.route('/censordetail').get(function(req, res){
     }
   });
 });
+=======
+      Imagecensor.findOne({_id: req.query.id}, function(err,result){
+      var idtocensor = req.query.id;
+      if(err) throw err;
+      else{
+        res.render('admin/censordetail', {id_censor:idtocensor,censor_image:result});
+      }
+    });
+  });
+>>>>>>> bc203cae8bac6a31dfbac5095c17603c099ca0f7
 
 router.post('/censored',isLoggedIn, function(req, res, next){
 
@@ -178,7 +272,11 @@ router.post('/censored',isLoggedIn, function(req, res, next){
   Imagecensor.findOne({_id: req.body.imagetocensor}, function(err, censorimg){
 
     Imagecensor.remove({'_id': censorimg._id}, function(err, img){
+<<<<<<< HEAD
       if(err)  return err;
+=======
+        if(err)  return err;
+>>>>>>> bc203cae8bac6a31dfbac5095c17603c099ca0f7
     });
 
     var array =  censorimg.imagecensorPath.split('r/');
@@ -187,6 +285,7 @@ router.post('/censored',isLoggedIn, function(req, res, next){
     });
 
     var image = new Image({
+<<<<<<< HEAD
       imagePath: "/images/"+array[1],
       title: censorimg.title,
       describe: censorimg.describe,
@@ -194,6 +293,15 @@ router.post('/censored',isLoggedIn, function(req, res, next){
     image.save(function(error){
       if(error) return error;
       console.log("save successfully");
+=======
+    imagePath: "/images/"+array[1],
+    title: censorimg.title,
+    describe: censorimg.describe,
+    });
+    image.save(function(error){
+    if(error) return error;
+    console.log("save successfully");
+>>>>>>> bc203cae8bac6a31dfbac5095c17603c099ca0f7
     })
 
     res.json({message: "censored successfully "});   
@@ -202,7 +310,11 @@ router.post('/censored',isLoggedIn, function(req, res, next){
 
 
 router.delete('/delsensorimage',isLoggedIn,function(req, res){
+<<<<<<< HEAD
   if(req.body.imagetodelete){
+=======
+    if(req.body.imagetodelete){
+>>>>>>> bc203cae8bac6a31dfbac5095c17603c099ca0f7
       // var pathunlink = './public/imagecensor/'+
       //   fs.unlink('/12.jpg', (err) => {
       //   if (err) throw err;
@@ -214,6 +326,7 @@ router.delete('/delsensorimage',isLoggedIn,function(req, res){
         else
           res.send({message: "deleted successfully " + req.body.imagetodelete });
       });
+<<<<<<< HEAD
     }
   })
 
@@ -238,6 +351,32 @@ router.get("/albummanagement", isLoggedIn, function(req, res, next){
      })
     })  
   })
+=======
+  }
+})
+
+router.get("/albummanagement", isLoggedIn, function(req, res, next){
+
+      Album.find({isonhomepage:"true"},function(err, albums){
+        if(err) return err;
+        var all_album_onhome = [];
+         var length_albums = 0;
+         albums.forEach(function(album){
+          ++length_albums;
+          Image.find({itsalbum: album._id},function(err, img){
+             var object_custom_img = {};
+             object_custom_img.images = img;
+             object_custom_img.album = album;
+             all_album_onhome.push(object_custom_img);
+             console.log(all_album_onhome);
+             --length_albums;
+             if(length_albums === 0){
+               res.render("admin/albummanagement",{ album: albums,all_album_onhome:all_album_onhome});
+             }
+          })
+         })  
+      })
+>>>>>>> bc203cae8bac6a31dfbac5095c17603c099ca0f7
 })
 
 
@@ -252,18 +391,28 @@ router.get("/album/:_id",isLoggedIn,function(req, res){
   })
 })
 
+<<<<<<< HEAD
 router.get("/newalbum",isLoggedIn,function(req, res){
   res.render("admin/newalbum");
 })
 
+=======
+>>>>>>> bc203cae8bac6a31dfbac5095c17603c099ca0f7
 module.exports = router;
 
 function isLoggedIn(req, res, next){
   if (!req.session.admin) {
+<<<<<<< HEAD
     res.redirect('/admin/login');
   } else {
     next();
   }
+=======
+        res.redirect('/admin/login');
+    } else {
+        next();
+    }
+>>>>>>> bc203cae8bac6a31dfbac5095c17603c099ca0f7
 }
 
 // router.post("/login",passport.authenticate('local', { successRedirect: '/admin/management',
@@ -288,7 +437,11 @@ function isLoggedIn(req, res, next){
 //     console.log("something run here!");
 //      res.redirect('/admin/login');
 //   }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> bc203cae8bac6a31dfbac5095c17603c099ca0f7
 // });
 
 // module.exports = router;

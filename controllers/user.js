@@ -237,6 +237,7 @@ router.post("/commentversion2",function(req, res, next){
   // });
 });
 
+<<<<<<< HEAD
 router.post('/createnewalbum',isLoggedIn, function(req, res){
   var album = new Album();
   album.title = req.body.title;
@@ -253,6 +254,8 @@ router.post('/createnewalbum',isLoggedIn, function(req, res){
 
 })
 
+=======
+>>>>>>> bc203cae8bac6a31dfbac5095c17603c099ca0f7
 function isLoggedIn(req, res, next){
   if (!req.session.user) {
     res.redirect('/user/login');
