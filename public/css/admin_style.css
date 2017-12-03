@@ -19,6 +19,7 @@ body {
        font-weight: bold;
        font-size: 16px;
       }
+<<<<<<< HEAD
  .search-container {
   float: right;
   margin-right: 20px;
@@ -43,6 +44,9 @@ body {
   border: none;
   cursor: pointer;
 }
+=======
+
+>>>>>>> bc203cae8bac6a31dfbac5095c17603c099ca0f7
 
 h4{
   color: #428bca;

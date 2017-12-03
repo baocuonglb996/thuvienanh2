@@ -5,6 +5,7 @@ var User = require('../model/user');
 var Album = require('../model/album');
 var Comment = require('../model/comment');
 
+<<<<<<< HEAD
 
 
 router.post('/searchalbum',function(req,res){
@@ -39,6 +40,9 @@ router.post('/searchalbum',function(req,res){
 
 /* GET home page. */
 
+=======
+/* GET home page. */
+>>>>>>> bc203cae8bac6a31dfbac5095c17603c099ca0f7
 router.get("/",function(req, res, next){
  var userid = null;
  if(req.session.user){
@@ -55,6 +59,10 @@ Album.find({isonhomepage:"true"},function(err, albums){
      object_custom_img.images = img;
      object_custom_img.album = album;
      all_album_onhome.push(object_custom_img);
+<<<<<<< HEAD
+=======
+     console.log(all_album_onhome);
+>>>>>>> bc203cae8bac6a31dfbac5095c17603c099ca0f7
      --length_albums;
      if(length_albums === 0){
        res.render("newindex",{userid: userid, album: albums,all_album_onhome:all_album_onhome,userlogin: req.session.user != null});
